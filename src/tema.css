@@ -1,0 +1,9 @@
+/* src/tema.css */
+.light{
+    background-color: azure;
+    color: dimgray;
+}
+.dark{
+    background-color: dimgray;
+    color: azure;
+}
