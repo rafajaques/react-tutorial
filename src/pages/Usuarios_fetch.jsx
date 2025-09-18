@@ -1,7 +1,6 @@
 // src/pages/Usuarios.jsx
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 const Usuarios = () => {
     const [dados, setDados] = useState(null);
@@ -10,10 +9,17 @@ const Usuarios = () => {
     useEffect(() => {
         const buscaDados = async () => {
             try {
-                
-                const resposta = await axios.get("https://jsonplaceholder.typicode.com/users");
+                const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
 
-                setDados(resposta.data);
+                // Verifica se deu erro
+                if (!resposta.ok) {
+                    throw new Error(`Erro no fetch: ${resposta.status}`);
+                }
+
+                // Se chegou aqui, deu tudo certo :-)
+                const resultado = await resposta.json();
+
+                setDados(resultado);
             } catch (erro) {
                 console.log(erro);
             } finally {
